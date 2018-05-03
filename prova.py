@@ -18,7 +18,7 @@ def selezione():
 		filtro="only_audio"
 	elif videoaudio == "video":
 		filtro="only_video"
-		provaa = str(yt.streams.filter(only_video=True,subtype='mp4').all())
+		provaa = str(yt.streams.filter(only_video=True,subtype='mp4',fps=30).all())
 		#print provaa
 		prova=re.findall('res\=\"([0-9]+)', provaa)
 		for i in range(len(prova)):
@@ -27,7 +27,7 @@ def selezione():
 def download():
 	global filtro,yt,qualita,videoaudio
 	if videoaudio == "canzone":	
-		yt.streams.filter(only_audio=True).download()
+		yt.streams.filter(only_audio=True).first().download()
 	elif videoaudio == "video":
 		prova=str(qualita)
 		yt.streams.filter(res=prova).first().download()	
@@ -52,5 +52,3 @@ while True:
 		download()
 	elif a == "5":
 		break
-
-
